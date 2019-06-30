@@ -14,7 +14,7 @@ test('Check Jupiter initialization.', () => {
   expect(newJupiter).toEqual({
     grid: undefined,
     position: undefined,
-    movement: undefined,
+    direction: undefined,
   });
 });
 
@@ -35,6 +35,14 @@ test('getPosition must be a function', () => {
   expect(newJupiter.getGrid).toBeInstanceOf(Function);
 });
 
+test('setDirection must be a function', () => {
+  expect(newJupiter.setDirection).toBeInstanceOf(Function);
+});
+
+test('getDirection must be a function', () => {
+  expect(newJupiter.getDirection).toBeInstanceOf(Function);
+});
+
 // Check getters and setters
 test('setGrid of 5x5 must be equal [5,5].', () => {
   expect(newJupiter.setGrid(5, 5)).toEqual([5, 5]);
@@ -49,18 +57,18 @@ test('getGrid of 5x5 must be truthy.', () => {
   expect(Array.isArray(newJupiter.getGrid())).toBeTruthy();
 });
 
-test('setPosition of [2,0,"N"] must be [2,0,"N"].', () => {
-  expect(newJupiter.setPosition(2,0,'N')).toEqual([2,0,"N"]);
+test('setPosition of x=2, y=0 must be {x: 2, y:0}.', () => {
+  expect(newJupiter.setPosition(2,0)).toEqual({x: 2, y:0});
 });
 
-test('setPosition of ["j", null, "P"] must be undefined.', () => {
-  expect(newJupiter.setPosition('j', null, 'P')).toBeUndefined();
+test('setPosition of x="j" and y=null must be undefined.', () => {
+  expect(newJupiter.setPosition('j', null)).toBeUndefined();
 });
 
-test('getPosition of x=3, y=2, face = "E" must be [3,2,"E"]', () => {
+test('getPosition of x=3, y=2 must be {x: 3, y:2}', () => {
   newJupiter.setGrid(5, 5);
-  newJupiter.setPosition(3,2,'E');
-  expect(newJupiter.getPosition()).toEqual([3,2,'E']);
+  newJupiter.setPosition(3,2);
+  expect(newJupiter.getPosition()).toEqual({x: 3, y:2});
 });
 
 test('Check setMovement.', () => {});

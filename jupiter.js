@@ -2,9 +2,10 @@ class Jupiter {
   constructor () {
     this.grid = undefined;
     this.position = undefined;
-    this.movement = undefined;
+    this.direction = undefined;
   }
 
+  // Getters & Setters
   setGrid (x, y) {
     if (typeof x === 'number' && typeof y === 'number'){
       if (x > 0 && y > 0){
@@ -44,6 +45,10 @@ class Jupiter {
 
   getPosition () {
     return this.position;
+  }
+
+  getDirection () {
+    return this.direction;
   }
 }
 
