@@ -71,6 +71,32 @@ test('getPosition of x=3, y=2 must be {x: 3, y:2}', () => {
   expect(newJupiter.getPosition()).toEqual({x: 3, y:2});
 });
 
-test('Check setMovement.', () => {});
+test('setDirection of null must be undefined.', () => {
+  newJupiter.setGrid(5, 5);
+  newJupiter.setDirection(null);
+  expect(newJupiter.getDirection()).toBeUndefined();
+});
 
-test('Check getMovement.', () => {});
+test('setDirection of "e" must be equal to "E"', () => {
+  newJupiter.setGrid(5, 5);
+  newJupiter.setDirection('e');
+  expect(newJupiter.getDirection()).toBe('E');
+});
+
+test('setDirection of "N" must be equal to "N"', () => {
+  newJupiter.setGrid(5, 5);
+  newJupiter.setDirection('N');
+  expect(newJupiter.getDirection()).toBe('N');
+});
+
+test('getDirection of face="s" must be equal to "S"', () => {
+  newJupiter.setGrid(5, 5);
+  newJupiter.setDirection('s');
+  expect(newJupiter.getDirection()).toBe('S');
+});
+
+test('getDirection of face="W" must be equal to "W"', () => {
+  newJupiter.setGrid(5, 5);
+  newJupiter.setDirection('W');
+  expect(newJupiter.getDirection()).toBe('W');
+});

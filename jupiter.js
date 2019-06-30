@@ -25,17 +25,22 @@ class Jupiter {
   setPosition (x, y, face) {
     if (typeof x === 'number' && typeof y === 'number'){
       if ((x >= 0 || y >= 0) || (x >= this.grid.length || y >= this.grid[0].length)){
-        if (['N','S','E','W'].includes(face)) {
-          this.position = [x,y,face];
-          return this.getPosition();
-        } else {
-          console.error(`The face direction must be: (N)orth, (S)outh, (E)ast or (W)est.`);
-        }
+        this.position = {x, y};
+        return this.getPosition();
       } else {
         console.error(`The coordinates must be numbers greater or equal than 0 and lower or equal to ${this.grid.length}`);
       }
     } else {
       console.error('The coordinates must be numbers.');
+    }
+  }
+  
+  setDirection (face) {
+    if (face && ['N','S','E','W'].includes(face.toUpperCase())) {
+      this.direction = face.toUpperCase();
+      return this.getDirection();
+    } else {
+      console.error(`The face direction must be: (N)orth, (S)outh, (E)ast or (W)est.`);
     }
   }
 
