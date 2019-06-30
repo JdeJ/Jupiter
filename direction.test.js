@@ -1,27 +1,39 @@
 const Direction = require ('./direction.js');
 
-let newDirection;
-beforeEach(() => {
-  newDirection = new Direction();
-});
-
 // Check Direction initialization
-test('newDirection must be an instance of Direction', () => {
-  expect(newDirection).toBeInstanceOf(Direction);
-});
-
 test('Check Direction initialization.', () => {
-  expect(newDirection).toEqual({
-    vectors: ['N','S','E','W'],
+  expect(Direction).toEqual({
+    vectors: ['N','E','S','W'],
   });
 });
 
 // Check methods definition
 test('getVector must be a function', () => {
-  expect(newDirection.getVectors).toBeInstanceOf(Function);
+  expect(Direction.getVectors).toBeInstanceOf(Function);
+});
+
+test('changeVector must be a function', () => {
+  expect(Direction.changeVector).toBeInstanceOf(Function);
 });
 
 // Check Direction getter
-test("getVectors must be ['N','S','E','W']", () => {
-  expect(newDirection.getVectors()).toEqual(['N','S','E','W']);
+test("getVectors must be ['N','E','S','W']", () => {
+  expect(Direction.getVectors()).toEqual(['N','E','S','W']);
+})
+
+// Check changeVector
+test("changeVector ('N', undefined) must be undefined", () => {
+  expect(Direction.changeVector('N', undefined)).toBeUndefined();
+})
+
+test("changeVector ('S','L') must be 'E'", () => {
+  expect(Direction.changeVector('S','L')).toBe('E');
+})
+
+test("changeVector ('W','R')must be 'N'", () => {
+  expect(Direction.changeVector('W','R')).toBe('N');
+})
+
+test("changeVector ('N','L')must be 'W'", () => {
+  expect(Direction.changeVector('N','L')).toBe('W');
 })
