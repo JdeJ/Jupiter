@@ -1,3 +1,5 @@
+const Direction = require('./direction');
+
 class Jupiter {
   constructor () {
     this.grid = undefined;
@@ -22,7 +24,7 @@ class Jupiter {
     }
   }
 
-  setPosition (x, y, face) {
+  setPosition (x, y) {
     if (typeof x === 'number' && typeof y === 'number'){
       if ((x >= 0 || y >= 0) || (x >= this.grid.length || y >= this.grid[0].length)){
         this.position = {x, y};
@@ -36,8 +38,10 @@ class Jupiter {
   }
   
   setDirection (face) {
-    if (face && ['N','S','E','W'].includes(face.toUpperCase())) {
-      this.direction = face.toUpperCase();
+    if (face && ['N','E','S','W'].includes(face.toUpperCase())) {
+      if (this.direction !== face.toUpperCase()) {
+        this.direction = face.toUpperCase();
+      }
       return this.getDirection();
     } else {
       console.error(`The face direction must be: (N)orth, (S)outh, (E)ast or (W)est.`);
@@ -54,6 +58,11 @@ class Jupiter {
 
   getDirection () {
     return this.direction;
+  }
+
+  // Change direction of Jupiter
+  changeDirection (newDirection) {
+    Direction.changeDirection(this.direction, newDirection.toUpperCase());
   }
 }
 
