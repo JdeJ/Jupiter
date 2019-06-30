@@ -27,23 +27,41 @@ test('getGrid must be a function', () => {
   expect(newJupiter.getGrid).toBeInstanceOf(Function);
 });
 
+test('setPosition must be a function', () => {
+  expect(newJupiter.setGrid).toBeInstanceOf(Function);
+});
+
+test('getPosition must be a function', () => {
+  expect(newJupiter.getGrid).toBeInstanceOf(Function);
+});
+
 // Check getters and setters
 test('setGrid of 5x5 must be equal [5,5].', () => {
   expect(newJupiter.setGrid(5, 5)).toEqual([5, 5]);
 });
 
-test('setGrid of NaN must be undefined.', () => {
+test('setGrid of ["j", null] must be undefined.', () => {
   expect(newJupiter.setGrid('j', null)).toBeUndefined();
 });
 
-test('getGrid of 5x5 must be', () => {
+test('getGrid of 5x5 must be truthy.', () => {
   newJupiter.setGrid(5, 5);
   expect(Array.isArray(newJupiter.getGrid())).toBeTruthy();
 });
 
-test('Check setPosition.', () => {});
+test('setPosition of [2,0,"N"] must be [2,0,"N"].', () => {
+  expect(newJupiter.setPosition(2,0,'N')).toEqual([2,0,"N"]);
+});
 
-test('Check getPosition.', () => {});
+test('setPosition of ["j", null, "P"] must be undefined.', () => {
+  expect(newJupiter.setPosition('j', null, 'P')).toBeUndefined();
+});
+
+test('getPosition of x=3, y=2, face = "E" must be [3,2,"E"]', () => {
+  newJupiter.setGrid(5, 5);
+  newJupiter.setPosition(3,2,'E');
+  expect(newJupiter.getPosition()).toEqual([3,2,'E']);
+});
 
 test('Check setMovement.', () => {});
 
