@@ -1,11 +1,12 @@
-const Direction = {
+class Direction {
   constructor () {
     this.vectors = ['N','S','E','W'];
   }
 
-  getVector () {
+  getVectors () {
     return this.vectors;
   }
+
 }
 
 module.exports = Direction;
