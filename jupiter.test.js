@@ -43,6 +43,10 @@ test('getDirection must be a function', () => {
   expect(newJupiter.getDirection).toBeInstanceOf(Function);
 });
 
+test('changeDirection must be a function', () => {
+  expect(newJupiter.changeDirection).toBeInstanceOf(Function);
+});
+
 // Check getters and setters
 test('setGrid of 5x5 must be equal [5,5].', () => {
   expect(newJupiter.setGrid(5, 5)).toEqual([5, 5]);
@@ -99,4 +103,29 @@ test('getDirection of face="W" must be equal to "W"', () => {
   newJupiter.setGrid(5, 5);
   newJupiter.setDirection('W');
   expect(newJupiter.getDirection()).toBe('W');
+});
+
+// Change Direction method
+test('changeDirection of undefined must be undefined', () => {
+  newJupiter.setGrid(5, 5);
+  newJupiter.setDirection('S');
+  expect(newJupiter.changeDirection()).toBeUndefined();
+});
+
+test('changeDirection of ("L") must be "E"', () => {
+  newJupiter.setGrid(5, 5);
+  newJupiter.setDirection('S');
+  expect(newJupiter.changeDirection("L")).toBe("E");
+});
+
+test('changeDirection of ("R") must be "N"', () => {
+  newJupiter.setGrid(5, 5);
+  newJupiter.setDirection('W');
+  expect(newJupiter.changeDirection("R")).toBe("N");
+});
+
+test('changeDirection of ("L") must be "W"', () => {
+  newJupiter.setGrid(5, 5);
+  newJupiter.setDirection('N');
+  expect(newJupiter.changeDirection("L")).toBe("W");
 });

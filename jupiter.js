@@ -39,9 +39,7 @@ class Jupiter {
   
   setDirection (face) {
     if (face && ['N','E','S','W'].includes(face.toUpperCase())) {
-      if (this.direction !== face.toUpperCase()) {
-        this.direction = face.toUpperCase();
-      }
+      this.direction = face.toUpperCase();
       return this.getDirection();
     } else {
       console.error(`The face direction must be: (N)orth, (S)outh, (E)ast or (W)est.`);
@@ -62,7 +60,12 @@ class Jupiter {
 
   // Change direction of Jupiter
   changeDirection (newDirection) {
-    Direction.changeDirection(this.direction, newDirection.toUpperCase());
+    if (newDirection) {
+      const actualizedDirection = Direction.changeVector(this.getDirection(), newDirection.toUpperCase());
+      return this.setDirection(actualizedDirection);
+    } else {
+      return;
+    }
   }
 }
 
