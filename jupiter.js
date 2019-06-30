@@ -67,6 +67,13 @@ class Jupiter {
       return;
     }
   }
+
+  // Shows Jupiter status
+  getStatus () {
+    if (this.getDirection() && this.getPosition()){
+      return `The Jupiter explorer is facing to ${this.direction} on {${this.position.x},${this.position.y}}`;
+    }
+  }
 }
 
 module.exports = Jupiter;
