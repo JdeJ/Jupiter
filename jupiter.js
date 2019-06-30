@@ -68,6 +68,36 @@ class Jupiter {
     }
   }
 
+  // Move Jupiter
+  moveForward(){
+    let newPosition = this.getPosition(); 
+  
+    switch (this.getDirection()){
+      case 'N':
+        newPosition.y--;
+        break;
+      case 'S':
+        newPosition.y++;
+        break;
+      case 'E':
+        newPosition.x++;
+        break;
+      case 'W':
+        newPosition.x--;
+        break;
+    }
+  
+    // Check grid bounds
+    if (newPosition) {
+      if ((newPosition.x < 0 || newPosition.x >= this.getGrid().length) || (newPosition.y < 0 || newPosition.y >= this.getGrid()[0].length)) {
+        console.error("The new position of the Jupiter is out of the grid!!");
+      } else {
+        this.setPosition(newPosition.x, newPosition.y);
+        return this.getPosition();
+      }
+    }
+  }
+
   // Shows Jupiter status
   getStatus () {
     if (this.getDirection() && this.getPosition()){

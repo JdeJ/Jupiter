@@ -51,6 +51,10 @@ test('getStatus must be a function', () => {
   expect(newJupiter.getStatus).toBeInstanceOf(Function);
 });
 
+test('moveForward must be a function', () => {
+  expect(newJupiter.moveForward).toBeInstanceOf(Function);
+});
+
 // Check getters and setters
 test('setGrid of 5x5 must be equal [5,5].', () => {
   expect(newJupiter.setGrid(5, 5)).toEqual([5, 5]);
@@ -66,10 +70,12 @@ test('getGrid of 5x5 must be truthy.', () => {
 });
 
 test('setPosition of x=2, y=0 must be {x: 2, y:0}.', () => {
+  newJupiter.setGrid(5, 5);
   expect(newJupiter.setPosition(2,0)).toEqual({x: 2, y:0});
 });
 
 test('setPosition of x="j" and y=null must be undefined.', () => {
+  newJupiter.setGrid(5, 5);
   expect(newJupiter.setPosition('j', null)).toBeUndefined();
 });
 
@@ -136,11 +142,33 @@ test('changeDirection of ("L") must be "W"', () => {
 
 // getStatus method
 test("getStatus of undefined must be undefined", () => {
+  newJupiter.setGrid(5, 5);
   expect(newJupiter.getStatus()).toBeUndefined();
 });
 
 test("getStatus of {x:3, y: 5} and 'N' must be:", () => {
+  newJupiter.setGrid(5, 5);
   newJupiter.setDirection('N');
   newJupiter.setPosition(3,5);
   expect(newJupiter.getStatus()).toEqual("The Jupiter explorer is facing to N on {3,5}");
+});
+
+// moveForward method
+// getStatus method
+test("moveFordward of undefined must be undefined", () => {
+  expect(newJupiter.moveForward()).toBeUndefined();
+});
+
+test("moveFordward of {x:0, y: 0} and 'W' must be undefined", () => {
+  newJupiter.setGrid(5, 5);
+  newJupiter.setDirection('W');
+  newJupiter.setPosition(0,0);
+  expect(newJupiter.moveForward()).toBeUndefined();
+});
+
+test("moveFordward of {x:3, y: 4} and 'N' must be {x:3, y:3}", () => {
+  newJupiter.setGrid(5, 5);
+  newJupiter.setDirection('N');
+  newJupiter.setPosition(3,4);
+  expect(newJupiter.moveForward()).toEqual({x:3, y:3});
 });
