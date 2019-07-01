@@ -38,7 +38,7 @@ class Jupiter {
   }
   
   setDirection (face) {
-    if (face && ['N','E','S','W'].includes(face.toUpperCase())) {
+    if (face && ['N','E','S','W'].includes(face[0].toUpperCase())) {
       this.direction = face.toUpperCase();
       return this.getDirection();
     } else {
