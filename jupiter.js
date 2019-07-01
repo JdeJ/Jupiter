@@ -70,30 +70,32 @@ class Jupiter {
 
   // Move Jupiter
   moveForward(){
-    let newPosition = this.getPosition(); 
+    if (this.getPosition()) {
+      let newPosition = Object.assign({}, this.getPosition()); 
   
-    switch (this.getDirection()){
-      case 'N':
-        newPosition.y--;
-        break;
-      case 'S':
-        newPosition.y++;
-        break;
-      case 'E':
-        newPosition.x++;
-        break;
-      case 'W':
-        newPosition.x--;
-        break;
-    }
-  
-    // Check grid bounds
-    if (newPosition) {
-      if ((newPosition.x < 0 || newPosition.x >= this.getGrid().length) || (newPosition.y < 0 || newPosition.y >= this.getGrid()[0].length)) {
-        console.error("The new position of the Jupiter is out of the grid!!");
-      } else {
-        this.setPosition(newPosition.x, newPosition.y);
-        return this.getPosition();
+      switch (this.getDirection()){
+        case 'N':
+          newPosition.y--;
+          break;
+        case 'S':
+          newPosition.y++;
+          break;
+        case 'E':
+          newPosition.x++;
+          break;
+        case 'W':
+          newPosition.x--;
+          break;
+      }
+    
+      // Check grid bounds
+      if (newPosition) {
+        if ((newPosition.x < 0 || newPosition.x >= this.getGrid().length) || (newPosition.y < 0 || newPosition.y >= this.getGrid()[0].length)) {
+          console.error("The new position of the Jupiter is out of the grid!!");
+        } else {
+          this.setPosition(newPosition.x, newPosition.y);
+          return this.getPosition();
+        }
       }
     }
   }
@@ -102,6 +104,31 @@ class Jupiter {
   getStatus () {
     if (this.getDirection() && this.getPosition()){
       return `The Jupiter explorer is facing to ${this.direction} on {${this.position.x},${this.position.y}}`;
+    }
+  }
+
+  // Jupiter task
+  task (commands) {
+    if (commands){
+      const tasks = commands.toLowerCase().split('');
+      let invalidOrders = 0;
+  
+      tasks.forEach(task => {
+        if (['r','l','m'].includes(task)) {
+          task === 'm' ? this.moveForward() : this.changeDirection(task);
+        } else {
+          invalidOrders++;
+        }
+      });
+      
+      if (invalidOrders === tasks.length){
+        console.error('Invalid commands.');
+        return;
+      } else if (invalidOrders > 0) {
+        console.info('Invalid commands are obviated.');
+      } 
+
+      return this.getStatus();
     }
   }
 }

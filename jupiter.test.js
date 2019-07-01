@@ -5,7 +5,7 @@ beforeEach(() => {
   newJupiter = new Jupiter();
 });
 
-// Check Jupiter initialization
+//Check Jupiter initialization
 test('newJupiter must be an instance of Jupiter', () => {
   expect(newJupiter).toBeInstanceOf(Jupiter);
 });
@@ -53,6 +53,10 @@ test('getStatus must be a function', () => {
 
 test('moveForward must be a function', () => {
   expect(newJupiter.moveForward).toBeInstanceOf(Function);
+});
+
+test('task must be a function', () => {
+  expect(newJupiter.task).toBeInstanceOf(Function);
 });
 
 // Check getters and setters
@@ -154,21 +158,49 @@ test("getStatus of {x:3, y: 5} and 'N' must be:", () => {
 });
 
 // moveForward method
-// getStatus method
-test("moveFordward of undefined must be undefined", () => {
+test("moveForward of undefined must be undefined", () => {
   expect(newJupiter.moveForward()).toBeUndefined();
 });
 
-test("moveFordward of {x:0, y: 0} and 'W' must be undefined", () => {
+test("moveForward of {x:0, y: 0} and 'W' must be undefined", () => {
   newJupiter.setGrid(5, 5);
   newJupiter.setDirection('W');
   newJupiter.setPosition(0,0);
   expect(newJupiter.moveForward()).toBeUndefined();
 });
 
-test("moveFordward of {x:3, y: 4} and 'N' must be {x:3, y:3}", () => {
+test("moveForward of {x:3, y: 4} and 'N' must be {x:3, y:3}", () => {
   newJupiter.setGrid(5, 5);
   newJupiter.setDirection('N');
   newJupiter.setPosition(3,4);
   expect(newJupiter.moveForward()).toEqual({x:3, y:3});
+});
+
+// task method
+test("task of undefined must be undefined", () => {
+  newJupiter.setGrid(5, 5);
+  newJupiter.setDirection('N');
+  newJupiter.setPosition(0,0);
+  expect(newJupiter.task()).toBeUndefined();
+});
+
+test("task of invalid commands must be undefined", () => {
+  newJupiter.setGrid(5, 5);
+  newJupiter.setDirection('N');
+  newJupiter.setPosition(0,0);
+  expect(newJupiter.task('HGTF9')).toBeUndefined();
+});
+
+test("task of 'rmrmmmr' must be ", () => {
+  newJupiter.setGrid(5, 5);
+  newJupiter.setDirection('N');
+  newJupiter.setPosition(0,0);
+  expect(newJupiter.task('mrmrmmmr')).toEqual("The Jupiter explorer is facing to W on {1,3}");
+});
+
+test("task of 'llmmmmPl' must be ", () => {
+  newJupiter.setGrid(5, 5);
+  newJupiter.setDirection('N');
+  newJupiter.setPosition(0,0);
+  expect(newJupiter.task('llmmmmPl')).toEqual("The Jupiter explorer is facing to E on {0,4}");
 });
